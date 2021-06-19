@@ -2,14 +2,7 @@ package tv.codealong.tutorials.springboot.thenewboston.controller
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import tv.codealong.tutorials.springboot.thenewboston.model.Bank
 import tv.codealong.tutorials.springboot.thenewboston.service.BankService
 
@@ -34,4 +27,7 @@ class BankController(private val service: BankService) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun post(@RequestBody bank: Bank): Bank = service.addBank(bank)
+
+    @PatchMapping
+    fun patch(@RequestBody bank: Bank): Bank = service.updateBank(bank)
 }
