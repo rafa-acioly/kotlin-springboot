@@ -14,6 +14,7 @@ class MockBankDataSource : BankDataSource {
     )
 
     override fun retrieveBanks(): Collection<Bank> = banks
+
     override fun retrieveBank(accountNumber: String): Bank =
         banks.firstOrNull { it.accountNumber == accountNumber }
             ?: throw NoSuchElementException("Could not find a bank with account number $accountNumber")
@@ -35,5 +36,11 @@ class MockBankDataSource : BankDataSource {
         banks.add(bank)
 
         return bank
+    }
+
+    override fun deleteBank(accountNumber: String) {
+        if (!banks.removeIf { it.accountNumber == accountNumber }) {
+            throw NoSuchElementException("Could not delete bank with account number: $accountNumber")
+        }
     }
 }
